@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,11 @@ public class App {
     private static Conection Con;
     public static void main(String[] args){
         App.Con = new Conection();
+        LocalDate date = LocalDate.now();
+        Con.insert("log", date.toString(), "blah1");
+        Con.insert("log", date.toString(), "blah2");
+        Con.insert("log", date.toString(), "blah3");
+        Con.insert("log", date.toString(), "blah4");
         try {
             conection();
         } catch (IOException ex) {
@@ -35,9 +41,9 @@ public class App {
     public static void conection() throws IOException{
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(35000);
+            serverSocket = new ServerSocket(34000);
         } catch (IOException e) {
-            System.err.println("Could not listen on port: 35000.");
+            System.err.println("Could not listen on port: 34000.");
             System.exit(1);
         }
         Socket clientSocket = null;
@@ -52,11 +58,15 @@ public class App {
         String inputLine, outputLine;
         while ((inputLine = in .readLine()) != null) {
             System.out.println("Mensaje:" +inputLine);
-            outputLine = "Respuesta" + inputLine;
-            out.println(outputLine);
-            if (outputLine.equals("Respuestas: Bye.")) break;
+            if (!(inputLine.contains("consulta DB"))){
+                LocalDate date = LocalDate.now();
+                App.Con.insert("log", inputLine, date.toString());
+            }
+            System.out.println(App.Con.getData("log"));
+            out.println(App.Con.getData("log"));
         }
-        out.close(); in .close();
+        out.close();
+        in .close();
         clientSocket.close();
         serverSocket.close();
     }

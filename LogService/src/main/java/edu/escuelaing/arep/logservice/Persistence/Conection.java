@@ -21,14 +21,12 @@ import java.util.Iterator;
  * @author diego
  */
 public class Conection {
-    private final MongoClientURI uri;
     private final MongoClient mongoCl ;
     private final DB database;
     
     public Conection() {
-        this.uri = new MongoClientURI("mongodb+srv://mongodb:MongoDB29@cluster0.cgjvc.mongodb.net/Temperatures?retryWrites=true&w=majority");
-        mongoCl = new MongoClient(uri);
-        database = mongoCl.getDB("Cluster0");
+        mongoCl = new MongoClient();
+        database = mongoCl.getDB("DockerData");
         if (mongoCl!=null){
             System.out.println("OK");
         }
@@ -43,21 +41,19 @@ public class Conection {
 	document.put("Date", date);
 	document.put("log", temp);
 	collection.insert(document);
-        System.out.println(name+" "+date+" "+temp);
     }
     
     public void Close(){
         mongoCl.close();
     }
     
-    public ArrayList getData(String name){
-        ArrayList<String> Data = new ArrayList<>();
+    public String getData(String name){
+        String Data = "";
         DBCollection collection = database.getCollection(name);
 	Iterator<DBObject> cursor = collection.find().iterator();
         DBObject it ;
         while (cursor.hasNext()){
-            it = cursor.next();
-            Data.add(it.toString());
+            Data+=cursor.next().toString().replace("{", "").replace("}", "").replace(" ", "").replace("\"", "")+";";
         }
         return Data;
     }
