@@ -27,7 +27,7 @@ public class ClientServer {
         try {
             echoSocket = new Socket(host, Integer.parseInt(port));
             out = new PrintWriter(echoSocket.getOutputStream(), true); in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-            
+            System.out.println("----------------OK------------");
         } catch (UnknownHostException e) {
             System.err.println("Don’t know about host!.");
             System.exit(1);

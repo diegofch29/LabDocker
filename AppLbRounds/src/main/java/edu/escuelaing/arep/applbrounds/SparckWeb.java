@@ -11,6 +11,7 @@ package edu.escuelaing.arep.applbrounds;
  */
 import edu.escuelaing.arep.applbrounds.Client.ClientServer;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import spark.Request;
@@ -22,7 +23,7 @@ import static spark.Spark.*;
  * @author diego
  */
 public class SparckWeb {
-    private static String[][] sockets ={{"127.0.0.1","34000"},{"127.0.0.1","34001"},{"127.0.0.1","34002"}};
+    private static String[][] sockets ={{"192.168.0.7","34000"},{"192.168.0.7","34001"},{"192.168.0.7","34002"}};
     private static int count = 0;
     private static ClientServer client;
     public static void main(String[] args){
@@ -34,22 +35,23 @@ public class SparckWeb {
     
     private static String inputData(Request req,Response res){
         String resp = ((req.queryParams("cadena"))==null)?"consulta DB":req.queryParams("cadena");
+        System.out.println(resp);
         String page="<!DOCTYPE html>"
                 + "<html>"
                 + "<body>"
                 + "<h2>WALL :D</h2>"
                 + "<form action=\"/data\">"
-                + "  Valores:<br>"
-                + "  <input type=\"text\" name=\"Valores\" value=\"your message\">"
+                + "  your message:<br>"
+                + "  <input type=\"text\" name=\"cadena\" value=\"your message\">"
                 + "  <br><br>"
-                + "  <input type=\"submit\" name=\"cadena\" value=\"Subir\">"
+                + "  <input type=\"submit\" name=\"ca\" value=\"Subir\">"
                 + "</form>";
         page = createHtmlTable(page);
         try {
-            //String Data = SparckWeb.client.Server(sockets[(count)%4-1][0],sockets[(count)%4-1][1]);
-            String Dataa = SparckWeb.client.Server(resp,"127.0.0.1","34000");
+            //String Dataa = SparckWeb.client.Server(resp,sockets[(count)%4-1][0],sockets[(count)%4-1][1]);
+            String Dataa = SparckWeb.client.Server(resp,"192.168.0.7","34000");
             System.out.println(Dataa);
-            page+=FillHtmlTable(page,Dataa);
+            page = FillHtmlTable(page,Dataa);
         } catch (IOException ex) {
             Logger.getLogger(SparckWeb.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,19 +86,21 @@ public class SparckWeb {
     private static String FillHtmlTable(String outputLine, String datos){
         System.out.println(datos);
         String col ="<table style=\"width:100%\">"
-                + "<caption>Temperaturas</caption>"
+                + "<caption>Logs</caption>"
                 +"<tr>"
                     + "<th>Date</th>"
                     + "<th>Mesagge</th>"
                     + "</tr>";
         String[] data = datos.split(";");
         for (String i : data){
-            System.out.println(i.split(",")[1].split(":")[1]+" "+i.split(",")[2].split(":")[1]+ "------------------");
+            //System.out.println(i.split(",")[1].split(":")[1]+" "+i.split(",")[2].split(":")[1]+ "------------------");
+            System.out.println(i);
             col+="<tr>"
-                    + "<th>"+i.split(",")[1].split(":")[1]+"</th>"
                     + "<th>"+i.split(",")[2].split(":")[1]+"</th>"
+                    + "<th>"+i.split(",")[1].split(":")[1]+"</th>"
                     + "</tr>";
         }
+        System.out.println("--------------------SALIO-------------------");
         return outputLine+col;       
     }
  

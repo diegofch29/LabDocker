@@ -25,12 +25,10 @@ public class App {
     public static void main(String[] args){
         App.Con = new Conection();
         LocalDate date = LocalDate.now();
-        Con.insert("log", date.toString(), "blah1");
-        Con.insert("log", date.toString(), "blah2");
-        Con.insert("log", date.toString(), "blah3");
-        Con.insert("log", date.toString(), "blah4");
         try {
-            conection();
+            while(true){
+                conection();
+            }
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
