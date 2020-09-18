@@ -23,7 +23,7 @@ import static spark.Spark.*;
  * @author diego
  */
 public class SparckWeb {
-    private static String[][] sockets ={{"192.168.0.7","34000"},{"192.168.0.7","34001"},{"192.168.0.7","34002"}};
+    private static String[][] sockets ={{"54.163.109.153","34000"},{"54.163.109.153","34001"},{"54.163.109.153","34002"}};
     private static int count = 0;
     private static ClientServer client;
     public static void main(String[] args){
@@ -31,7 +31,7 @@ public class SparckWeb {
         port(getPort());
         get("/data", (req, res) -> inputData(req, res));
     }
-    
+        
     
     private static String inputData(Request req,Response res){
         String resp = ((req.queryParams("cadena"))==null)?"consulta DB":req.queryParams("cadena");
@@ -48,8 +48,8 @@ public class SparckWeb {
                 + "</form>";
         page = createHtmlTable(page);
         try {
-            //String Dataa = SparckWeb.client.Server(resp,sockets[(count)%4-1][0],sockets[(count)%4-1][1]);
-            String Dataa = SparckWeb.client.Server(resp,"192.168.0.7","34000");
+            String Dataa = SparckWeb.client.Server(resp,sockets[(count)%3][0],sockets[(count)%3][1]);
+            //String Dataa = SparckWeb.client.Server(resp,"192.168.0.8","34000");
             System.out.println(Dataa);
             page = FillHtmlTable(page,Dataa);
         } catch (IOException ex) {

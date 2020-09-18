@@ -15,4 +15,4 @@ COPY /target/dependency /usrapp/bin/dependency
 
  
 
-CMD ["java","-cp","./classes:./dependency/*","edu.escuelaing.arep.applbrounds"]
+CMD ["java","-cp","./classes:./dependency/*","edu.escuelaing.arep.applbrounds.SparckWeb"]
