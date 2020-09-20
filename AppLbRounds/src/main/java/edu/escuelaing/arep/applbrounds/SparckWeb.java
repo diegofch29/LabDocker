@@ -23,7 +23,7 @@ import static spark.Spark.*;
  * @author diego
  */
 public class SparckWeb {
-    private static String[][] sockets ={{"54.163.109.153","34000"},{"54.163.109.153","34001"},{"54.163.109.153","34002"}};
+    private static String[][] sockets ={{"127.0.0.1","34000"},{"127.0.0.1","34001"},{"127.0.0.1","34002"}};
     private static int count = 0;
     private static ClientServer client;
     public static void main(String[] args){

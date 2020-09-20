@@ -27,7 +27,7 @@ public class Conection {
     
     
     public Conection() {
-        mongoCl = new MongoClient(new MongoClientURI("mongodb://54.163.109.153:27017"));
+        mongoCl = new MongoClient(new MongoClientURI("mongodb://127.0.0.1:27017"));
         database = mongoCl.getDB("DockerData");
         if (mongoCl!=null){
             System.out.println("OK");
