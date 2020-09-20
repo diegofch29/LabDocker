@@ -80,11 +80,11 @@ Use la siguiente linea para obtener el proyecto
   
   ## Construido  
     
-   * [Java 8] (https://www.java.com/) - Leguaje de programacion
-   * [Maven] (https://maven.apache.org/) - Manejador de dependencias
-   * [Docker] (https://www.docker.com/) - Virtualizacion en contenedores
-   * [AWS] (https://aws.amazon.com/) - Computacion en la nube
-   * [Github] (https://github.com/) - Manejador de versiones
+   * [Java 8](https://www.java.com/) - Leguaje de programacion
+   * [Maven](https://maven.apache.org/) - Manejador de dependencias
+   * [Docker](https://www.docker.com/) - Virtualizacion en contenedores
+   * [AWS](https://aws.amazon.com/) - Computacion en la nube
+   * [Github](https://github.com/) - Manejador de versiones
   
   ## Autor
   
