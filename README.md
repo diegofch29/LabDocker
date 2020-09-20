@@ -31,11 +31,61 @@ Use la siguiente linea para obtener el proyecto
   mvn exec:java -Dexec.mainClass="edu.escuelaing.arep.applbrounds.SparckWeb"
   ```
   
-## to run
+  ingrese a http://localhost:4567/data y pruebe.
+  
 
-```
-mvn exec:java -Dexec.mainClass="edu.escuelaing.arep.applbrounds.SparckWeb"
-```
-```
-mvn exec:java -Dexec.mainClass="edu.escuelaing.arep.logservice.App" 
-```
+## Usando Docker
+  Para crear la imagenes debe ingresar a LabDocker/LogService e ingrese la siguiente linea
+  ```
+  sudo docker build --tag imagedockerlogservice
+  ```
+  Ahora ingrese a LabDocker/AppLbRounds e ingrese
+  ```
+  sudo docker build --tag imagedockerapplbrounds
+  ```
+  Para crear los contenedores:
+  * Contenedor AppLbRounds
+   ```
+   docker run -d -p 4567:6000 --name dockerapplbrounds imagedockerapplbrounds 
+   ```
+  * Conetenedores Logservice(Ejecutar 3 veces omo se muestra).
+  ```
+  docker run -d -p 34000:34000 --name dockerlogservice1 imagedockerlogservice
+  ```
+  ```
+  docker run -d -p 34001:34000 --name dockerlogservice2 imagedockerlogservice
+  ```
+  ```
+  docker run -d -p 34002:34000 --name dockerlogservice imagedockerlogservice
+  ```
+  
+  Ingrese a http://localhost:4567/data y deberia poder ver lo siguiente.
+  
+  ![Principal](/images/proof.png)
+  
+  ## Corriendo en una instancia EC2 de AWS
+  
+  * Primero se creo una instancia EC2 en AWS (actualmente terminada).
+  * Se descargo un contenedor de Mongodb.
+    ![mongodb](/images/MongoContainer.png)
+  * Desde dockerhub se descargaron y se corrienron los conteiners
+  * Lbrounds
+    ![lbrounds](/images/lbrounds.png)
+  * Logservice
+    ![logservice](/images/logservice1.png)
+  * Resultado docker
+    ![AWSdocker](/images/AWSDocker.png)
+  * Resultado final
+    ![proof](/images/goof.png)
+  
+  ## Construido  
+  
+  
+    * [Java 8](https://www.java.com/) - Leguaje de programacion
+    * [Maven] (https://maven.apache.org/) - Manejador de dependencias
+    * [Docker] (https://www.docker.com/) - Virtualizacion en contenedores
+    * [AWS] (https://aws.amazon.com/) - Computacion en la nube
+    * [Github] (https://github.com/) - Manejador de versiones
+    
+
+
