@@ -1,6 +1,6 @@
 # Taller de de modularización con virtualización e Introducción a Docker y a AWS
 
-Con el uso de virtualizacion con docker se creo una micro-aplicacion web de logs que puede correr en una instancia EC2 de AWS.
+Con el uso de virtualizacion con docker se creo una micro-aplicacion web de logs que puede correr en una instancia EC2 de AWS, para mas informacion revise ![AWS_Docker](AWS_Docker.pdf)
 
 ## Como obtener
 Use la siguiente linea para obtener el proyecto
